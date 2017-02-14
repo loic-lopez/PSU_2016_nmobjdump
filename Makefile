@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Tue Feb 14 16:27:27 2017 Loic Lopez
+## Last update Tue Feb 14 16:28:25 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -14,7 +14,7 @@ OBJDUMP	=	my_objdump
 
 NM	=	my_nm
 
-ECHO	=	/bin/echo -e \
+ECHO	=	/bin/echo -e
 
 DEFAULT	=	"\033[00m"
 GREEN	=	"\033[0;32m"
