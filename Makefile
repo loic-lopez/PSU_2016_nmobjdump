@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Tue Feb 14 14:50:24 2017 Loic Lopez
+## Last update Tue Feb 14 15:25:21 2017 Loic Lopez
 ##
 
 
@@ -25,9 +25,11 @@ RED	=	"\033[5;31m"
 CFLAGS	=	-Wextra -Wall -Werror
 CFLAGS	+= -I./include
 
-SRC_OBJDUMP	=	sources/main_objdump.c
+SRC_OBJDUMP	=	sources/main_objdump.c \
+	sources/64_32bit.c
 
-SRC_NM	=	sources/main_nm.c
+SRC_NM	=	sources/main_nm.c \
+	sources/64_32bit.c
 
 OBJ_OBJDUMP	=	$(SRC_OBJDUMP:.c=.o)
 OBJ_NM	=	$(SRC_NM:.c=.o)
