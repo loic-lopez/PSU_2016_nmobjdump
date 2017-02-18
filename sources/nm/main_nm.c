@@ -5,17 +5,16 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:31:25 2017 Loic Lopez
-** Last update Tue Feb 14 15:27:04 2017 Loic Lopez
+** Last update Sat Feb 18 18:42:58 2017 Loic Lopez
 */
 
 #include "nmobjdump.h"
 
 int main(int ac, char **av)
 {
-  (void)ac, (void)av;
-  if (is_64bit())
-    printf("64BITS\n");
-  else if (is_32bit())
-    printf("32BITS\n");
-  return 0;
+  int	fd;
+
+  fd = check_program_args(ac, av);
+  fd = fd;
+  return (0);
 }

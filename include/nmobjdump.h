@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:22:22 2017 Loic Lopez
-** Last update Tue Feb 14 15:27:16 2017 Loic Lopez
+** Last update Sat Feb 18 18:39:43 2017 Loic Lopez
 */
 
 #ifndef NMOBJDUMP_H_
@@ -14,9 +14,16 @@
 #include <elf.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <stdlib.h>
+
 #include "flags.h"
 
-bool is_32bit();
-bool is_64bit();
+int	filesize(int fd);
+int	check_program_args(int ac, char **av);
 
 #endif /* !NMOBJDUMP_H_ */
