@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:21:50 2017 Loic Lopez
-** Last update Sat Feb 18 18:36:48 2017 Loic Lopez
+** Last update Sun Feb 19 11:37:08 2017 Loic Lopez
 */
 
 #include "nmobjdump.h"
@@ -19,7 +19,8 @@ int	main(int ac, char **av)
   int	fd;
 
   fd = check_program_args(ac, av);
-  data = mmap(NULL, filesize(fd), PROT_READ, MAP_SHARED, fd, 0);
+  if ((data = mmap(NULL, filesize(fd), PROT_READ, MAP_SHARED, fd, 0)) == MAP_FAILED)
+    print_error_and_exit("mmap", av[0]);
   elf = (Elf64_Ehdr *)data;
   shdr = (Elf64_Shdr *)(data + elf->e_shoff);
   strtab = (char *)(data + shdr[elf->e_shstrndx].sh_offset);

@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Sat Feb 18 18:42:43 2017 Loic Lopez
+## Last update Sun Feb 19 11:31:28 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -26,10 +26,14 @@ CFLAGS	+= -I./include
 
 SRC_OBJDUMP	=	sources/objdump/main_objdump.c \
 	sources/general/filesize.c \
-	sources/general/check_program_args.c
+	sources/general/check_program_args.c \
+	sources/general/print_error_and_exit.c
 
 SRC_NM	=	sources/nm/main_nm.c \
-	sources/general/check_program_args.c
+	sources/general/check_program_args.c\
+	sources/general/filesize.c \
+	sources/general/print_error_and_exit.c
+
 
 
 OBJ_OBJDUMP	=	$(SRC_OBJDUMP:.c=.o)

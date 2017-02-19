@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:31:25 2017 Loic Lopez
-** Last update Sat Feb 18 18:42:58 2017 Loic Lopez
+** Last update Sun Feb 19 11:16:51 2017 Loic Lopez
 */
 
 #include "nmobjdump.h"
@@ -16,5 +16,5 @@ int main(int ac, char **av)
 
   fd = check_program_args(ac, av);
   fd = fd;
-  return (0);
+  return (EXIT_SUCCESS);
 }
