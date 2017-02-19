@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:22:22 2017 Loic Lopez
-** Last update Sun Feb 19 12:45:15 2017 Loic Lopez
+** Last update Sun Feb 19 12:47:03 2017 Loic Lopez
 */
 
 #ifndef MY_OBJDUMP_H_
@@ -14,6 +14,7 @@
 #include <elf.h>
 #include <stdio.h>
 #include <sys/mman.h>
+#include <unistd.h>
 #include <stdlib.h>
 
 #include "flags.h"

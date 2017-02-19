@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Sun Feb 19 12:42:11 2017 Loic Lopez
+## Last update Sun Feb 19 12:48:55 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -45,13 +45,13 @@ all:		$(OBJDUMP) $(NM)
 
 $(OBJDUMP):	$(OBJ_OBJDUMP)
 		@$(CC) $(OBJ_OBJDUMP) $(CFLAGS) -o $(OBJDUMP) && \
-		$(ECHO) $(GREEN) "[OK] BUILD :" $(TEAL) $(OBJDUMP) $(DEFAULT)  || \
+		$(ECHO) $(GREEN) "[OK]"$(TEAL)"  BUILD :" $(OBJDUMP) $(DEFAULT)  || \
 		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(OBJDUMP) $(DEFAULT)
 
 
 $(NM):		$(OBJ_NM)
 		@$(CC) $(OBJ_NM) $(CFLAGS) -o $(NM) && \
-		$(ECHO) $(GREEN) "[OK] BUILD :" $(TEAL) $(NM) $(DEFAULT)  || \
+		$(ECHO) $(GREEN) "[OK]"$(TEAL)"  BUILD :" $(NM) $(DEFAULT)  || \
 		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(NM) $(DEFAULT)
 
 clean:
