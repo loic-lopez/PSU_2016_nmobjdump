@@ -5,14 +5,13 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:16:14 2017 Loic Lopez
-** Last update Sun Feb 19 12:40:12 2017 Loic Lopez
+** Last update Sun Feb 19 12:45:31 2017 Loic Lopez
 */
 
 #ifndef MY_NM_H_
 #define MY_NM_H_
 
 #include <elf.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/mman.h>
