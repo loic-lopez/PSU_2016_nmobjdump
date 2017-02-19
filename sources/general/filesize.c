@@ -5,10 +5,10 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sat Feb 18 18:33:12 2017 Loic Lopez
-** Last update Sat Feb 18 18:33:38 2017 Loic Lopez
+** Last update Sun Feb 19 12:23:57 2017 Loic Lopez
 */
 
-#include "nmobjdump.h"
+#include "general.h"
 
 int	filesize(int fd)
 {

@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Sun Feb 19 11:31:28 2017 Loic Lopez
+## Last update Sun Feb 19 12:42:11 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -26,13 +26,15 @@ CFLAGS	+= 	-I./include
 
 SRC_OBJDUMP	=	sources/objdump/main_objdump.c \
 			sources/general/filesize.c \
-			sources/general/check_program_args.c \
+			sources/general/my_open.c \
 			sources/general/print_error_and_exit.c
 
 SRC_NM	=	sources/nm/main_nm.c \
-		sources/general/check_program_args.c\
+		sources/general/my_open.c\
 		sources/general/filesize.c \
-		sources/general/print_error_and_exit.c
+		sources/general/print_error_and_exit.c \
+		sources/nm/nm32_format.c \
+		sources/nm/nm64_format.c
 
 
 
@@ -43,13 +45,13 @@ all:		$(OBJDUMP) $(NM)
 
 $(OBJDUMP):	$(OBJ_OBJDUMP)
 		@$(CC) $(OBJ_OBJDUMP) $(CFLAGS) -o $(OBJDUMP) && \
-		$(ECHO) $(GREEN) "[OK]" $(TEAL) $(OBJDUMP) $(DEFAULT)  || \
+		$(ECHO) $(GREEN) "[OK] BUILD :" $(TEAL) $(OBJDUMP) $(DEFAULT)  || \
 		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(OBJDUMP) $(DEFAULT)
 
 
 $(NM):		$(OBJ_NM)
 		@$(CC) $(OBJ_NM) $(CFLAGS) -o $(NM) && \
-		$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NM) $(DEFAULT)  || \
+		$(ECHO) $(GREEN) "[OK] BUILD :" $(TEAL) $(NM) $(DEFAULT)  || \
 		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(NM) $(DEFAULT)
 
 clean:
