@@ -22,17 +22,17 @@ TEAL	=	"\033[1;36m"
 RED	=	"\033[5;31m"
 
 CFLAGS	=	-Wextra -Wall -Werror
-CFLAGS	+= -I./include
+CFLAGS	+= 	-I./include
 
 SRC_OBJDUMP	=	sources/objdump/main_objdump.c \
-	sources/general/filesize.c \
-	sources/general/check_program_args.c \
-	sources/general/print_error_and_exit.c
+			sources/general/filesize.c \
+			sources/general/check_program_args.c \
+			sources/general/print_error_and_exit.c
 
 SRC_NM	=	sources/nm/main_nm.c \
-	sources/general/check_program_args.c\
-	sources/general/filesize.c \
-	sources/general/print_error_and_exit.c
+		sources/general/check_program_args.c\
+		sources/general/filesize.c \
+		sources/general/print_error_and_exit.c
 
 
 
@@ -42,15 +42,15 @@ OBJ_NM	=	$(SRC_NM:.c=.o)
 all:		$(OBJDUMP) $(NM)
 
 $(OBJDUMP):	$(OBJ_OBJDUMP)
-	@$(CC) $(OBJ_OBJDUMP) $(CFLAGS) -o $(OBJDUMP) && \
-	$(ECHO) $(GREEN) "[OK]" $(TEAL) $(OBJDUMP) $(DEFAULT)  || \
-	$(ECHO) $(RED) "[ERROR]" $(TEAL) $(OBJDUMP) $(DEFAULT)
+		@$(CC) $(OBJ_OBJDUMP) $(CFLAGS) -o $(OBJDUMP) && \
+		$(ECHO) $(GREEN) "[OK]" $(TEAL) $(OBJDUMP) $(DEFAULT)  || \
+		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(OBJDUMP) $(DEFAULT)
 
 
-$(NM):	$(OBJ_NM)
-	@$(CC) $(OBJ_NM) $(CFLAGS) -o $(NM) && \
-	$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NM) $(DEFAULT)  || \
-	$(ECHO) $(RED) "[ERROR]" $(TEAL) $(NM) $(DEFAULT)
+$(NM):		$(OBJ_NM)
+		@$(CC) $(OBJ_NM) $(CFLAGS) -o $(NM) && \
+		$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NM) $(DEFAULT)  || \
+		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(NM) $(DEFAULT)
 
 clean:
 		@rm -f $(OBJ_OBJDUMP) $(OBJ_NM) && \
