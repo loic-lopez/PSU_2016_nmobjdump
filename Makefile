@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Mon Feb 20 14:39:48 2017 Loic Lopez
+## Last update Mon Feb 20 23:25:16 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -21,7 +21,7 @@ GREEN	=	"\033[0;32m"
 TEAL	=	"\033[1;36m"
 RED	=	"\033[5;31m"
 
-CFLAGS	=	-Wextra -Wall -Werror
+CFLAGS	=	-Wextra -Wall -Werror -g
 CFLAGS	+= 	-I./include
 
 SRC_OBJDUMP	=	sources/objdump/main_objdump.c \

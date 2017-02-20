@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:31:25 2017 Loic Lopez
-** Last update Mon Feb 20 15:03:07 2017 Loic Lopez
+** Last update Mon Feb 20 22:22:53 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -22,7 +22,7 @@ void	my_nm(char *file, char **av)
     return (print_error_and_exit("mmap", av[0]));
   elf = (Elf32_Ehdr *)data;
   if (elf->e_ident[EI_CLASS] == ELFCLASS32)
-    nm32_format(elf, av, data);
+    nm32_format(elf, av, filesize(fd), data);
   else if (elf->e_ident[EI_CLASS] == ELFCLASS64)
     nm64_format((Elf64_Ehdr *)data, av);
   else
@@ -42,7 +42,11 @@ int main(int ac, char **av)
     my_nm("a.out", av);
   else
     while (++i < ac)
+    {
+      if (ac >= 3)
+        printf("\n%s:", av[i]);
       my_nm(av[i], av);
+    }
 
   return (EXIT_SUCCESS);
 }
