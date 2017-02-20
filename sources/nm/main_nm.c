@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:31:25 2017 Loic Lopez
-** Last update Sun Feb 19 12:33:13 2017 Loic Lopez
+** Last update Mon Feb 20 15:03:07 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -22,9 +22,11 @@ void	my_nm(char *file, char **av)
     return (print_error_and_exit("mmap", av[0]));
   elf = (Elf32_Ehdr *)data;
   if (elf->e_ident[EI_CLASS] == ELFCLASS32)
-    nm32_format(elf, av);
+    nm32_format(elf, av, data);
   else if (elf->e_ident[EI_CLASS] == ELFCLASS64)
     nm64_format((Elf64_Ehdr *)data, av);
+  else
+    fprintf(stderr, "%s: %s: File format not recognized\n", av[0], file);
   if (munmap(data, filesize(fd)) == -1)
     return (print_error_and_exit("munmap", av[0]));
   if (close(fd) == -1)

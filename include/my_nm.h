@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:16:14 2017 Loic Lopez
-** Last update Sun Feb 19 12:45:31 2017 Loic Lopez
+** Last update Mon Feb 20 15:02:47 2017 Loic Lopez
 */
 
 #ifndef MY_NM_H_
@@ -16,13 +16,15 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
 #include "flags.h"
 
 int	filesize(int fd);
 int	my_open(char *file, char **av);
 void	print_error_and_exit(const char *str, const char *progname);
-void	nm32_format(Elf32_Ehdr *, char **av);
+void	nm32_format(Elf32_Ehdr *, char **av, void *data);
 void	nm64_format(Elf64_Ehdr *, char **av);
 
 #endif /* !MY_NM_H_ */
