@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:31:25 2017 Loic Lopez
-** Last update Tue Feb 21 15:44:25 2017 Loic Lopez
+** Last update Tue Feb 21 17:00:33 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -45,7 +45,7 @@ int main(int ac, char **av)
     while (++i < ac)
       {
 	if (ac >= 3)
-	  printf("\n%s:", av[i]);
+	  printf("\n%s:\n", av[i]);
 	my_nm(av[i], av);
       }
 
