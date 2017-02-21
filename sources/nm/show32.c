@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 21 15:40:36 2017 Loic Lopez
-** Last update Tue Feb 21 21:54:52 2017 Loic Lopez
+** Last update Tue Feb 21 22:11:21 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -43,44 +43,59 @@ int	print_32(Elf32_Sym *symbol, char *name, int j, Elf32_Shdr *shdr)
   return (j);
 }
 
-int	check_and_print32(char *tab[2], char *symbolName,
-			  int j, Elf32_Sym *symbol, Elf32_Shdr *shdr)
+int	check_and_print32(void *tab[3], char *symbolName,
+			  int j, Elf32_Sym *symbol)
 {
-  if (strcmp(tab[0], "data_start") == 0
+  char	*name;
+  char	*tmp;
+  Elf32_Shdr *shdr;
+
+  name = (char *)tab[0];
+  tmp = (char *)tab[1];
+  shdr = (Elf32_Shdr *)tab[2];
+  if (strcmp(name, "data_start") == 0
       && strcmp(symbolName, "data_start") == 0)
     j = print_32(symbol, "__data_start", j, shdr);
-  else if (strcmp(tab[0], "__data_start") == 0
+  else if (strcmp(name, "__data_start") == 0
 	   && strcmp(symbolName, "data_start") == 0)
     j = print_32(symbol, "data_start", j, shdr);
-  else if (strstr(tab[0], symbolName) != NULL
-	   && strlen(tab[1]) == strlen(symbolName))
-    j = print_32(symbol, tab[0], j, shdr);
+  else if (strstr(name, symbolName) != NULL
+	   && strlen(tmp) == strlen(symbolName))
+    j = print_32(symbol, name, j, shdr);
   return (j);
 }
 
-void	show_32(Elf32_Shdr *current, Elf32_Shdr *strtab, void *data, Elf32_Shdr *shdr)
+char	*get_name(char *tmp, char *name)
+{
+  name[0] == '_' && name[1] == '_' ? tmp = &name[2] :
+    name[0] == '_' ? tmp = &name[1] : (tmp = name);
+  return (tmp);
+}
+
+void	show_32(Elf32_Shdr *current, Elf32_Shdr *strtab,
+		void *data, Elf32_Shdr *shdr)
 {
   size_t	i;
   size_t	j;
   char	*name;
-  Elf32_Sym *symbol;
+  Elf32_Sym *sym;
   char	**symbolName;
   char	*tmp;
-  char	*tab[2];
+  void	*tab[3];
 
   symbolName = initSymbolsArray(current, strtab, data);
   i = j = 0;
   while (symbolName[j])
     {
-      symbol = (Elf32_Sym *)(data + current->sh_offset + i * sizeof(Elf32_Sym));
-      name = (char *)(data + strtab->sh_offset + symbol->st_name);
-      if (strcmp(name, "") > 0 && symbol->st_info != STT_FILE)
+      sym = (Elf32_Sym *)(data + current->sh_offset + i * sizeof(Elf32_Sym));
+      name = (char *)(data + strtab->sh_offset + sym->st_name);
+      if (strcmp(name, "") > 0 && sym->st_info != STT_FILE)
 	{
-	  name[0] == '_' && name[1] == '_' ? tmp = &name[2] :
-	    name[0] == '_' ? tmp = &name[1] : (tmp = name);
+	  tmp = get_name(tmp, name);
 	  tab[0] = name;
 	  tab[1] = tmp;
-	  j = check_and_print32(tab, symbolName[j], j, symbol, shdr);
+	  tab[2] = shdr;
+	  j = check_and_print32(tab, symbolName[j], j, sym);
 	}
       i == (current->sh_size / current->sh_entsize) - 1 ? i = 0 : i++;
     }

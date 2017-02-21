@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:16:14 2017 Loic Lopez
-** Last update Tue Feb 21 21:54:40 2017 Loic Lopez
+** Last update Tue Feb 21 22:05:52 2017 Loic Lopez
 */
 
 #ifndef MY_NM_H_

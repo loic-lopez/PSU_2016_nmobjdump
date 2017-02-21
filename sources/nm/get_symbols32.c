@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 21 21:51:55 2017 Loic Lopez
-** Last update Tue Feb 21 21:54:31 2017 Loic Lopez
+** Last update Tue Feb 21 22:09:25 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -44,12 +44,13 @@ char	get_shdr_symbols32(Elf32_Shdr *shdr, Elf32_Sym *symbol)
   c = '?';
   shdr[symbol->st_shndx].sh_type == SHT_NOBITS
     && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE) ? c = 'B' :
-  shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
-	   && shdr[symbol->st_shndx].sh_flags == SHF_ALLOC ?  c = 'R' :
-  shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
-	   && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE) ? c = 'D' :
-  shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
-	   && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_EXECINSTR) ?
-     c = 'T' : shdr[symbol->st_shndx].sh_type == SHT_DYNAMIC ? c = 'D' : c;
+    shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
+    && shdr[symbol->st_shndx].sh_flags == SHF_ALLOC ?  c = 'R' :
+    shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
+    && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE)
+    ? c = 'D' :
+    shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
+    && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_EXECINSTR) ?
+    c = 'T' : shdr[symbol->st_shndx].sh_type == SHT_DYNAMIC ? c = 'D' : c;
   return (c);
 }
