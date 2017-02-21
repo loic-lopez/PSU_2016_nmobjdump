@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 14 14:31:25 2017 Loic Lopez
-** Last update Mon Feb 20 22:22:53 2017 Loic Lopez
+** Last update Tue Feb 21 15:44:25 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -18,7 +18,8 @@ void	my_nm(char *file, char **av)
 
   if ((fd = my_open(file, av)) == -1)
     return;
-  if ((data = mmap(NULL, filesize(fd), PROT_READ, MAP_SHARED, fd, 0)) == MAP_FAILED)
+  if ((data = mmap(NULL, filesize(fd), PROT_READ,
+		   MAP_SHARED, fd, 0)) == MAP_FAILED)
     return (print_error_and_exit("mmap", av[0]));
   elf = (Elf32_Ehdr *)data;
   if (elf->e_ident[EI_CLASS] == ELFCLASS32)
@@ -42,11 +43,11 @@ int main(int ac, char **av)
     my_nm("a.out", av);
   else
     while (++i < ac)
-    {
-      if (ac >= 3)
-        printf("\n%s:", av[i]);
-      my_nm(av[i], av);
-    }
+      {
+	if (ac >= 3)
+	  printf("\n%s:", av[i]);
+	my_nm(av[i], av);
+      }
 
   return (EXIT_SUCCESS);
 }
