@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:15:02 2017 Loic Lopez
-** Last update Tue Feb 21 15:51:29 2017 Loic Lopez
+** Last update Tue Feb 21 20:18:37 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -87,6 +87,6 @@ void	nm32_format(Elf32_Ehdr *elf, char **av, size_t filesize, void *data)
       name = (char *)(data
         + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
       if (!strcmp(".symtab", name))
-        show_32((Elf32_Shdr *)(data + offset), stringtab, data);
+        show_32((Elf32_Shdr *)(data + offset), stringtab, data, shdr);
     }
 }
