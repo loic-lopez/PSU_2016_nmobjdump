@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:15:02 2017 Loic Lopez
-** Last update Tue Feb 21 01:26:16 2017 Loic Lopez
+** Last update Tue Feb 21 15:00:01 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -29,127 +29,70 @@ bool	is_truncated(size_t size, Elf32_Ehdr *elf)
     return (false);
 }
 
-bool	checkOrder(char *str, char *str2)
-{
-  size_t j;
-  size_t i;
 
-  i = 0;
-  j = 0;
-  if (str[0] == '_' && str[1] == '_')
-    i += 2;
-  else if (str2[0] == '_' && str2[1] == '_')
-    j += 2;
-  else if (str[0] == '_')
-    i += 1;
-  else if (str2[0] == '_')
-    j += 1;
 
-  while (str[i] && str2[j])
-  {
-    if (tolower(str[i]) < tolower(str2[j]))
-      return (true);
-    j++;
-    i++;
-  }
-  return (false);
-}
-
-bool	isNotOrdered(char *str, char *str2)
-{
-  size_t j;
-  size_t i;
-
-  i = 0;
-  j = 0;
-  if (str[0] == '_' && str[1] == '_')
-    i += 2;
-  else if (str2[0] == '_' && str2[1] == '_')
-    j += 2;
-  else if (str[0] == '_')
-    i += 1;
-  else if (str2[0] == '_')
-    j += 1;
-
-  while (str[i] && str2[j])
-  {
-    if (tolower(str[i]) > tolower(str2[j]))
-      return (true);
-    j++;
-    i++;
-  }
-
-  return (false);
-}
+char	**initSymbolsArray(Elf32_Shdr *current, Elf32_Shdr *strtab, void *data, char	**symbolName);
+int	my_compare(const void *a, const void *b);
 
 void	show_32(Elf32_Shdr *current, Elf32_Shdr *strtab, void *data)
 {
   size_t	i;
   size_t	j;
-  size_t	x;
-  char *name;
+  char	*name;
   Elf32_Sym *symbol;
-  char **symbolName;
-  int	*symbols;
+  char	**symbolName;
+  char	*tmp;
 
-
+  symbolName = NULL;
+  symbolName = initSymbolsArray(current, strtab, data, symbolName);
   i = 0;
   j = 0;
-  symbolName = malloc(sizeof(Elf32_Sym *) * current->sh_size / current->sh_entsize);
-  symbols = malloc(sizeof(Elf32_Sym *) * current->sh_size / current->sh_entsize);
-  while (i < current->sh_size / current->sh_entsize)
-    {
-      symbol = (Elf32_Sym *)(data + current->sh_offset + i * sizeof(Elf32_Sym));
-      name = (char *)(data + strtab->sh_offset + symbol->st_name);
-      if (strcmp(name, "") > 0 && symbol->st_info != STT_FILE)
-	     {
-         symbols[j] = symbol->st_value;
-         symbolName[j++] = strdup(name);
-	     }
-      i++;
-    }
-  symbolName[j] = NULL;
-  i = 0;
+  while (symbolName[j])
+  {
+    symbol = (Elf32_Sym *)(data + current->sh_offset + i * sizeof(Elf32_Sym));
+    name = (char *)(data + strtab->sh_offset + symbol->st_name);
+    if (strcmp(name, "") > 0 && symbol->st_info != STT_FILE)
+      {
+        name[0] == '_' && name[1] == '_' ? tmp = &name[2] :
+        name[0] == '_' ? tmp = &name[1] : (tmp = name);
+        if (strcmp(name, "data_start") == 0 && strcmp(symbolName[j], "data_start") == 0)
+        {
+          printf("%08x ", symbol->st_value);
+          // print_symbol(elf, symbol);
+          printf(" %s\n", "__data_start");
+          j++;
+        }
+        else if (strcmp(name, "__data_start") == 0 && strcmp(symbolName[j], "data_start") == 0)
+        {
+          printf("%08x ", symbol->st_value);
+          // print_symbol(elf, symbol);
+          printf(" %s\n", "data_start");
+          j++;
+        }
+        else if (strcmp(tmp, symbolName[j]) == 0)
+        {
+          if (symbol->st_value != 0)
+           printf("%08x ", symbol->st_value);
+          else
+           printf("%*c", 8, ' ');
+          // print_symbol(elf, symbol);
+          printf(" %s\n", name);
+          j++;
+        }
+        else if (strstr(name, symbolName[j]) != NULL && strlen(tmp) == strlen(symbolName[j]))
+          {
 
-  while (symbolName[i])
-  {
-    printf("%s\n", symbolName[i]);
-    i++;
-  }
-  printf("\n");
-  i = 0;
-  while (1)
-  {
-    if (i > 0 && symbolName[i - 1] && checkOrder(symbolName[i], symbolName[i - 1]))
-    {
-      name = symbolName[i];
-      symbolName[i] = symbolName[i - 1];
-      symbolName[i - 1] = name;
+            if (symbol->st_value != 0)
+             printf("%08x ", symbol->st_value);
+            else
+             printf("%*c", 8, ' ');
+            // print_symbol(elf, symbol);
+            printf(" %s\n", name);
+            j++;
+          }
     }
-    else if (i < j && symbolName[i + 1] && checkOrder(symbolName[i], symbolName[i + 1]))
-    {
-      name = symbolName[i];
-      symbolName[i] = symbolName[i + 1];
-      symbolName[i + 1] = name;
-    }
-    if (i == j - 1)
+    if (i == (current->sh_size / current->sh_entsize) - 1)
       i = 0;
-    x = 0;
-    while (symbolName[x])
-    {
-      if (x < j && isNotOrdered(symbolName[x], symbolName[x + 1]))
-        break;
-      x++;
-    }
-    if (x == 1)
-      break;
-    i++;
-  }
-
-  i = 0;
-  while (symbolName[i])
-  {
-    printf("%s\n", symbolName[i]);
     i++;
   }
 }
