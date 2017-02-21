@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:16:14 2017 Loic Lopez
-** Last update Mon Feb 20 22:22:46 2017 Loic Lopez
+** Last update Tue Feb 21 00:39:38 2017 Loic Lopez
 */
 
 #ifndef MY_NM_H_
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "flags.h"
 
