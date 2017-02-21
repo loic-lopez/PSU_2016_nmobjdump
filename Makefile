@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Tue Feb 21 15:41:48 2017 Loic Lopez
+## Last update Tue Feb 21 21:55:02 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -36,7 +36,8 @@ SRC_NM	=	sources/nm/main_nm.c \
 		sources/nm/nm32_format.c \
 		sources/nm/nm64_format.c \
 		sources/nm/initSymbolsArray.c \
-		sources/nm/show32.c
+		sources/nm/show32.c \
+		sources/nm/get_symbols32.c
 
 
 
