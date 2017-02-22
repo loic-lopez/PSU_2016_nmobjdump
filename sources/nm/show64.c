@@ -1,21 +1,21 @@
 /*
-** show32.c for nmobjdump in /Users/loiclopez/Documents/Shared/Epitech/year_2016/psu/PSU_2016_nmobjdump/sources/nm/
+** show64.c for nmobjdump in /Users/loiclopez/Documents/Shared/Epitech/year_2016/psu/PSU_2016_nmobjdump/sources/nm/
 **
 ** Made by Loic Lopez
 ** Login   <loic.lopez@epitech.eu>
 **
-** Started on  Tue Feb 21 15:40:36 2017 Loic Lopez
-** Last update Wed Feb 22 18:47:01 2017 Loic Lopez
+** Started on  Wed Feb 22 18:31:15 2017 Loic Lopez
+** Last update Wed Feb 22 18:58:12 2017 Loic Lopez
 */
 
 #include "my_nm.h"
 
-void	print_symbol_letter(Elf32_Sym *symbol, Elf32_Shdr *shdr, char *name)
+void	print_symbol_letter64(Elf64_Sym *symbol, Elf64_Shdr *shdr, char *name)
 {
   char c;
 
-  c = get_symbol32(symbol);
-  c == '?' ? c = get_shdr_symbols32(shdr, symbol) : c;
+  c = get_symbol64(symbol);
+  c == '?' ? c = get_shdr_symbols64(shdr, symbol) : c;
   if (c == '?')
     c = 'T';
   symbol->st_info == STT_NOTYPE ? c = 'B' : c;
@@ -31,63 +31,56 @@ void	print_symbol_letter(Elf32_Sym *symbol, Elf32_Shdr *shdr, char *name)
   printf("%c", c);
 }
 
-int	print_32(Elf32_Sym *symbol, char *name, int j, Elf32_Shdr *shdr)
+int	print_64(Elf64_Sym *symbol, char *name, int j, Elf64_Shdr *shdr)
 {
   if (symbol->st_value != 0)
-    printf("%08x ", symbol->st_value);
+    printf("%016lx ", symbol->st_value);
   else
-    printf("%*c", 9, ' ');
-  print_symbol_letter(symbol, shdr, name);
+    printf("%*c", 17, ' ');
+  print_symbol_letter64(symbol, shdr, name);
   printf(" %s\n", name);
   j++;
   return (j);
 }
 
-int	check_and_print32(void *tab[3], char *symbolName,
-			  int j, Elf32_Sym *symbol)
+int	check_and_print64(void *tab[3], char *symbolName,
+			  int j, Elf64_Sym *symbol)
 {
   char	*name;
   char	*tmp;
-  Elf32_Shdr *shdr;
+  Elf64_Shdr *shdr;
 
   name = (char *)tab[0];
   tmp = (char *)tab[1];
-  shdr = (Elf32_Shdr *)tab[2];
+  shdr = (Elf64_Shdr *)tab[2];
   if (strcmp(name, "data_start") == 0
       && strcmp(symbolName, "data_start") == 0)
-    j = print_32(symbol, "__data_start", j, shdr);
+    j = print_64(symbol, "__data_start", j, shdr);
   else if (strcmp(name, "__data_start") == 0
 	   && strcmp(symbolName, "data_start") == 0)
-    j = print_32(symbol, "data_start", j, shdr);
+    j = print_64(symbol, "data_start", j, shdr);
   else if (strstr(name, symbolName) != NULL
 	   && strlen(tmp) == strlen(symbolName))
-    j = print_32(symbol, name, j, shdr);
+    j = print_64(symbol, name, j, shdr);
   return (j);
 }
 
-char	*get_name(char *tmp, char *name)
-{
-  name[0] == '_' && name[1] == '_' ? tmp = &name[2] :
-    name[0] == '_' ? tmp = &name[1] : (tmp = name);
-  return (tmp);
-}
-
-void	show_32(Elf32_Shdr *current, Elf32_Shdr *strtab,
-		void *data, Elf32_Shdr *shdr)
+void	show_64(Elf64_Shdr *current, Elf64_Shdr *strtab,
+  void *data, Elf64_Shdr *shdr)
 {
   size_t	i;
   size_t	j;
   char	*name;
-  Elf32_Sym *sym;
+  Elf64_Sym *sym;
   char	**symbolName;
   char	*tmp;
   void	*tab[3];
 
-  symbolName = initSymbolsArray(current, strtab, data);
+  symbolName = initSymbolsArray64(current, strtab, data);
   i = j = 0;
   while (symbolName[j])
     {
-      sym = (Elf32_Sym *)(data + current->sh_offset + i * sizeof(Elf32_Sym));
+      sym = (Elf64_Sym *)(data + current->sh_offset + i * sizeof(Elf64_Sym));
       name = (char *)(data + strtab->sh_offset + sym->st_name);
       if (strcmp(name, "") > 0 && sym->st_info != STT_FILE)
 	{
@@ -95,7 +88,7 @@ void	show_32(Elf32_Shdr *current, Elf32_Shdr *strtab,
 	  tab[0] = name;
 	  tab[1] = tmp;
 	  tab[2] = shdr;
-	  j = check_and_print32(tab, symbolName[j], j, sym);
+	  j = check_and_print64(tab, symbolName[j], j, sym);
 	}
       i == (current->sh_size / current->sh_entsize) - 1 ? i = 0 : i++;
     }

@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 21 14:35:58 2017 Loic Lopez
-** Last update Tue Feb 21 15:44:49 2017 Loic Lopez
+** Last update Wed Feb 22 18:40:32 2017 Loic Lopez
 */
 
 #include "my_nm.h"
@@ -52,6 +52,36 @@ char	**initSymbolsArray(Elf32_Shdr *current,
     {
       symbol = (Elf32_Sym *)(data + current->sh_offset
 			     + i * sizeof(Elf32_Sym));
+      name = (char *)(data + strtab->sh_offset + symbol->st_name);
+      if (strcmp(name, "") > 0 && symbol->st_info != STT_FILE)
+	{
+	  name[0] == '_' && name[1] == '_' ? symbolName[j++] = &name[2] :
+	    name[0] == '_' ?  symbolName[j++] = &name[1]
+	    : (symbolName[j++] = name);
+	}
+    }
+  symbolName[j] = NULL;
+  qsort(symbolName, j, sizeof(char *), my_compare);
+  return (symbolName);
+}
+
+char	**initSymbolsArray64(Elf64_Shdr *current,
+			   Elf64_Shdr *strtab, void *data)
+{
+  size_t	i;
+  size_t	j;
+  char	*name;
+  Elf64_Sym	*symbol;
+  char	**symbolName;
+
+  i = -1;
+  j = 0;
+  symbolName = malloc(sizeof(Elf64_Sym) * current->sh_size
+		      / current->sh_entsize);
+  while (++i < current->sh_size / current->sh_entsize)
+    {
+      symbol = (Elf64_Sym *)(data + current->sh_offset
+			     + i * sizeof(Elf64_Sym));
       name = (char *)(data + strtab->sh_offset + symbol->st_name);
       if (strcmp(name, "") > 0 && symbol->st_info != STT_FILE)
 	{

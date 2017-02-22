@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Tue Feb 21 21:55:02 2017 Loic Lopez
+## Last update Wed Feb 22 18:56:35 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -21,7 +21,7 @@ GREEN	=	"\033[0;32m"
 TEAL	=	"\033[1;36m"
 RED	=	"\033[5;31m"
 
-CFLAGS	=	-Wextra -Wall -Werror -g
+CFLAGS	=	-Wextra -Wall -Werror
 CFLAGS	+= 	-I./include
 
 SRC_OBJDUMP	=	sources/objdump/main_objdump.c \
@@ -37,7 +37,9 @@ SRC_NM	=	sources/nm/main_nm.c \
 		sources/nm/nm64_format.c \
 		sources/nm/initSymbolsArray.c \
 		sources/nm/show32.c \
-		sources/nm/get_symbols32.c
+		sources/nm/get_symbols32.c \
+		sources/nm/show64.c \
+		sources/nm/get_symbols64.c
 
 
 
