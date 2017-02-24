@@ -5,14 +5,14 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Wed Feb 22 18:56:35 2017 Loic Lopez
+## Last update Fri Feb 24 14:31:59 2017 Loic Lopez
 ##
 
 CC	=	gcc
 
-OBJDUMP	=	my_objdump
+OBJDUMPEX	=	my_objdump
 
-NM	=	my_nm
+NMEX	=	my_nm
 
 ECHO	=	/bin/echo -e
 
@@ -46,17 +46,20 @@ SRC_NM	=	sources/nm/main_nm.c \
 OBJ_OBJDUMP	=	$(SRC_OBJDUMP:.c=.o)
 OBJ_NM	=	$(SRC_NM:.c=.o)
 
-all:		$(OBJDUMP) $(NM)
+all:		objdump nm
 
-$(OBJDUMP):	$(OBJ_OBJDUMP)
-		@$(CC) $(OBJ_OBJDUMP) $(CFLAGS) -o $(OBJDUMP) && \
-		$(ECHO) $(GREEN) "[OK]"$(TEAL)"  BUILD :" $(OBJDUMP) $(DEFAULT)  || \
+objdump: $(OBJDUMPEX)
+
+$(OBJDUMPEX): $(OBJ_OBJDUMP)
+		@$(CC) $(OBJ_OBJDUMP) $(CFLAGS) -o $(OBJDUMPEX) && \
+		$(ECHO) $(GREEN) "[OK]"$(TEAL)"  BUILD :" $(OBJDUMPEX) $(DEFAULT)  || \
 		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(OBJDUMP) $(DEFAULT)
 
+nm: $(NMEX)
 
-$(NM):		$(OBJ_NM)
-		@$(CC) $(OBJ_NM) $(CFLAGS) -o $(NM) && \
-		$(ECHO) $(GREEN) "[OK]"$(TEAL)"  BUILD :" $(NM) $(DEFAULT)  || \
+$(NMEX): $(OBJ_NM)
+		@$(CC) $(OBJ_NM) $(CFLAGS) -o $(NMEX) && \
+		$(ECHO) $(GREEN) "[OK]"$(TEAL)"  BUILD :" $(NMEX) $(DEFAULT)  || \
 		$(ECHO) $(RED) "[ERROR]" $(TEAL) $(NM) $(DEFAULT)
 
 clean:
@@ -65,8 +68,8 @@ clean:
 		$(ECHO) $(RED) "[ERROR] doesn't exist" $(TEAL) $(OBJ) $(DEFAULT)
 
 fclean:		clean
-		@rm -f $(OBJDUMP) $(NM) && \
-		$(ECHO) $(GREEN) "[OK] remove" $(TEAL) $(OBJDUMP) $(NM) $(DEFAULT) || \
+		@rm -f $(OBJDUMPEX) $(NMEX) && \
+		$(ECHO) $(GREEN) "[OK] remove" $(TEAL) $(OBJDUMPEX) $(NMEX) $(DEFAULT) || \
 		$(ECHO) $(RED) "[ERROR] doesn't exist" $(TEAL) $(OBJ) $(DEFAULT)
 
 re:		fclean all
