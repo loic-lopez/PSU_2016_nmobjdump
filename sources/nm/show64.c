@@ -5,12 +5,12 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Wed Feb 22 18:31:15 2017 Loic Lopez
-** Last update Wed Feb 22 18:58:12 2017 Loic Lopez
+** Last update Fri Feb 24 23:28:57 2017 Loic Lopez
 */
 
 #include "my_nm.h"
 
-void	print_symbol_letter64(Elf64_Sym *symbol, Elf64_Shdr *shdr, char *name)
+char	print_symbol_letter64(Elf64_Sym *symbol, Elf64_Shdr *shdr, char *name)
 {
   char c;
 
@@ -28,16 +28,19 @@ void	print_symbol_letter64(Elf64_Sym *symbol, Elf64_Shdr *shdr, char *name)
     c = 't';
   else if (strcmp(name, "__GNU_EH_FRAME_HDR") == 0)
     c = 'r';
-  printf("%c", c);
+  return (c);
 }
 
 int	print_64(Elf64_Sym *symbol, char *name, int j, Elf64_Shdr *shdr)
 {
-  if (symbol->st_value != 0)
+  char c;
+
+  c = print_symbol_letter64(symbol, shdr, name);
+  if (c != 'w' && c != 'U')
     printf("%016lx ", symbol->st_value);
   else
     printf("%*c", 17, ' ');
-  print_symbol_letter64(symbol, shdr, name);
+  printf("%c", c);
   printf(" %s\n", name);
   j++;
   return (j);

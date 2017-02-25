@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:16:14 2017 Loic Lopez
-** Last update Wed Feb 22 18:46:03 2017 Loic Lopez
+** Last update Sat Feb 25 14:34:32 2017 Loic Lopez
 */
 
 #ifndef MY_NM_H_
@@ -33,11 +33,14 @@ void	show_32(Elf32_Shdr *current, Elf32_Shdr *strtab
   , void *data, Elf32_Shdr *shdr);
 char	get_symbol32(Elf32_Sym *symbol);
 char	get_shdr_symbols32(Elf32_Shdr *shdr, Elf32_Sym *symbol);
+bool	check_if_thereis_an_error(Elf32_Ehdr *elf, char **av, size_t filesize);
 
 void	nm64_format(Elf64_Ehdr *elf, char **av, size_t filesize, void *data);
 char	get_symbol64(Elf64_Sym *symbol);
 char	get_shdr_symbols64(Elf64_Shdr *shdr, Elf64_Sym *symbol);
 void	show_64(Elf64_Shdr *current, Elf64_Shdr *strtab, void *data, Elf64_Shdr *shdr);
+bool	check_if_thereis_an_error64(Elf64_Ehdr *elf, char **av,
+  size_t filesize);
 
 char	*get_name(char *tmp, char *name);
 char	**initSymbolsArray64(Elf64_Shdr *current,

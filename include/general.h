@@ -5,7 +5,7 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Sun Feb 19 12:23:16 2017 Loic Lopez
-** Last update Sun Feb 19 12:26:28 2017 Loic Lopez
+** Last update Fri Feb 24 23:40:29 2017 Loic Lopez
 */
 
 #ifndef GENERAL_H_
@@ -17,6 +17,8 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdio.h>
+#include <elf.h>
+#include <stdbool.h>
 
 void	print_error_and_exit(const char *str, const char *progname);
 

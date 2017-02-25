@@ -5,7 +5,7 @@
 ## Login   <loic.lopez@epitech.eu>
 ##
 ## Started on  Tue Feb 14 14:21:35 2017 Loic Lopez
-## Last update Fri Feb 24 14:31:59 2017 Loic Lopez
+## Last update Sat Feb 25 14:54:19 2017 Loic Lopez
 ##
 
 CC	=	gcc
@@ -21,13 +21,22 @@ GREEN	=	"\033[0;32m"
 TEAL	=	"\033[1;36m"
 RED	=	"\033[5;31m"
 
-CFLAGS	=	-Wextra -Wall -Werror
+CFLAGS	=	-Wextra -Wall -Werror -g
 CFLAGS	+= 	-I./include
 
 SRC_OBJDUMP	=	sources/objdump/main_objdump.c \
 			sources/general/filesize.c \
 			sources/general/my_open.c \
-			sources/general/print_error_and_exit.c
+			sources/general/print_error_and_exit.c \
+			sources/general/check_if_thereis_an_error64.c \
+			sources/general/check_if_thereis_an_error32.c \
+			sources/objdump/flags64.c \
+			sources/objdump/objdump64_format.c \
+			sources/objdump/must_i_print_it.c		\
+			sources/objdump/print64.c \
+			sources/objdump/print32.c \
+			sources/objdump/flags32.c \
+			sources/objdump/objdump32_format.c \
 
 SRC_NM	=	sources/nm/main_nm.c \
 		sources/general/my_open.c\
@@ -39,7 +48,9 @@ SRC_NM	=	sources/nm/main_nm.c \
 		sources/nm/show32.c \
 		sources/nm/get_symbols32.c \
 		sources/nm/show64.c \
-		sources/nm/get_symbols64.c
+		sources/nm/get_symbols64.c \
+		sources/general/check_if_thereis_an_error64.c \
+		sources/general/check_if_thereis_an_error32.c
 
 
 

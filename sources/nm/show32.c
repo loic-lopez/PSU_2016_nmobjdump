@@ -5,12 +5,12 @@
 ** Login   <loic.lopez@epitech.eu>
 **
 ** Started on  Tue Feb 21 15:40:36 2017 Loic Lopez
-** Last update Wed Feb 22 18:47:01 2017 Loic Lopez
+** Last update Fri Feb 24 23:28:41 2017 Loic Lopez
 */
 
 #include "my_nm.h"
 
-void	print_symbol_letter(Elf32_Sym *symbol, Elf32_Shdr *shdr, char *name)
+char	print_symbol_letter(Elf32_Sym *symbol, Elf32_Shdr *shdr, char *name)
 {
   char c;
 
@@ -28,16 +28,19 @@ void	print_symbol_letter(Elf32_Sym *symbol, Elf32_Shdr *shdr, char *name)
     c = 't';
   else if (strcmp(name, "__GNU_EH_FRAME_HDR") == 0)
     c = 'r';
-  printf("%c", c);
+  return (c);
 }
 
 int	print_32(Elf32_Sym *symbol, char *name, int j, Elf32_Shdr *shdr)
 {
-  if (symbol->st_value != 0)
+  char	c;
+
+  c = print_symbol_letter(symbol, shdr, name);
+  if (c != 'w' && c != 'U')
     printf("%08x ", symbol->st_value);
   else
     printf("%*c", 9, ' ');
-  print_symbol_letter(symbol, shdr, name);
+  printf("%c", c);
   printf(" %s\n", name);
   j++;
   return (j);
