@@ -10,7 +10,6 @@
 
 #include "my_nm.h"
 
-
 Elf64_Shdr	*get_stringtab64(Elf64_Shdr *shdr, Elf64_Ehdr *elf, void *data)
 {
   size_t i;
@@ -19,12 +18,12 @@ Elf64_Shdr	*get_stringtab64(Elf64_Shdr *shdr, Elf64_Ehdr *elf, void *data)
 
   i = -1;
   while (++i < elf->e_shnum)
-  {
-   offset = elf->e_shoff + i * sizeof(Elf64_Shdr);
-   name = (char *)(data + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
-   if (!strcmp(".strtab", name))
-     return ((Elf64_Shdr *)(data + offset));
-  }
+    {
+      offset = elf->e_shoff + i * sizeof(Elf64_Shdr);
+      name = (char *)(data + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
+      if (!strcmp(".strtab", name))
+	return ((Elf64_Shdr *)(data + offset));
+    }
   return (NULL);
 }
 
@@ -47,7 +46,7 @@ void	nm64_format(Elf64_Ehdr *elf, char **av, size_t filesize, void *data)
     {
       offset = elf->e_shoff + i * sizeof(Elf64_Shdr);
       name = (char *)(data
-        + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
+		      + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
       if (!strcmp(".symtab", name))
         show_64((Elf64_Shdr *)(data + offset), stringtab, data, shdr);
     }

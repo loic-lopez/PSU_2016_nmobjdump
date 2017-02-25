@@ -13,8 +13,8 @@
 bool	check32_integrity(Elf32_Ehdr *elf)
 {
   if (elf->e_ident[EI_MAG0] != ELFMAG0 || elf->e_ident[EI_MAG1] != ELFMAG1 ||
-    elf->e_ident[EI_MAG2] != ELFMAG2 || elf->e_ident[EI_MAG3] != ELFMAG3 ||
-    elf->e_type == ET_NONE)
+      elf->e_ident[EI_MAG2] != ELFMAG2 || elf->e_ident[EI_MAG3] != ELFMAG3 ||
+      elf->e_type == ET_NONE)
     return (false);
   else
     return (true);
@@ -31,20 +31,21 @@ bool	is_truncated(size_t size, Elf32_Ehdr *elf)
 bool	check_if_thereis_an_error(Elf32_Ehdr *elf, char **av, size_t filesize)
 {
   if (!check32_integrity(elf))
-  {
-    fprintf(stderr, "%s: Wrong header in: %s", av[0], av[1]);
-    return (true);
-  }
+    {
+      fprintf(stderr, "%s: Wrong header in: %s", av[0], av[1]);
+      return (true);
+    }
   else if (elf->e_shstrndx == SHN_UNDEF)
-  {
-    fprintf(stderr,
-      "%s: %s: Undefined reference to header section tables", av[0], av[1]);
-    return (true);
-  }
+    {
+      fprintf(stderr,
+	      "%s: %s: Undefined reference to header section tables",
+	      av[0], av[1]);
+      return (true);
+    }
   else if (is_truncated(filesize, elf))
-  {
-    fprintf(stderr, "%s: %s: File truncated\n", av[0], av[1]);
-    return (true);
-  }
+    {
+      fprintf(stderr, "%s: %s: File truncated\n", av[0], av[1]);
+      return (true);
+    }
   return (false);
 }

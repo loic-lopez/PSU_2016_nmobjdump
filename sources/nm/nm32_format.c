@@ -18,12 +18,12 @@ Elf32_Shdr	*get_stringtab(Elf32_Shdr *shdr, Elf32_Ehdr *elf, void *data)
 
   i = -1;
   while (++i < elf->e_shnum)
-  {
-   offset = elf->e_shoff + i * sizeof(Elf32_Shdr);
-   name = (char *)(data + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
-   if (!strcmp(".strtab", name))
-     return ((Elf32_Shdr *)(data + offset));
-  }
+    {
+      offset = elf->e_shoff + i * sizeof(Elf32_Shdr);
+      name = (char *)(data + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
+      if (!strcmp(".strtab", name))
+	return ((Elf32_Shdr *)(data + offset));
+    }
   return (NULL);
 }
 
@@ -46,7 +46,7 @@ void	nm32_format(Elf32_Ehdr *elf, char **av, size_t filesize, void *data)
     {
       offset = elf->e_shoff + i * sizeof(Elf32_Shdr);
       name = (char *)(data
-        + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
+		      + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
       if (!strcmp(".symtab", name))
         show_32((Elf32_Shdr *)(data + offset), stringtab, data, shdr);
     }

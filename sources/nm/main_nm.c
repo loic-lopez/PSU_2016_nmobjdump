@@ -43,11 +43,11 @@ int main(int ac, char **av)
     my_nm("a.out", av);
   else
     while (++i < ac)
-    {
-      if (ac > 2)
-        printf("\n%s:\n", av[i]);
-      my_nm(av[i], av);
-    }
+      {
+	if (ac > 2)
+	  printf("\n%s:\n", av[i]);
+	my_nm(av[i], av);
+      }
 
   return (EXIT_SUCCESS);
 }

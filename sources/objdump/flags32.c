@@ -35,7 +35,8 @@ size_t	count_flags(size_t total_flags, bool *flags, Elf32_Ehdr *elf)
   return (total_flags);
 }
 
-size_t	get_flags32(Elf32_Ehdr *elf, Elf32_Shdr *shdr, char *strtab, bool *flags)
+size_t	get_flags32(Elf32_Ehdr *elf, Elf32_Shdr *shdr,
+		    char *strtab, bool *flags)
 {
   size_t total_flags;
   int	i;

@@ -10,7 +10,7 @@
 
 #include "my_objdump.h"
 
-char	*getElf64(Elf64_Ehdr	*elf)
+char	*getElf64(Elf64_Ehdr *elf)
 {
   if (elf->e_machine == EM_NONE)
     return "NONE";
@@ -30,11 +30,12 @@ char	*getArch64(Elf64_Ehdr	*elf)
   return ("NONE");
 }
 
-void	objdump64_format(Elf64_Ehdr	*elf, char **av, size_t filesize, void *data)
+void	objdump64_format(Elf64_Ehdr *elf, char **av,
+			 size_t filesize, void *data)
 {
   Elf64_Shdr	*shdr;
   char	*strtab;
-  int	i = 0;
+  int	i;
   bool	*flags;
 
   i = -1;
@@ -48,7 +49,7 @@ void	objdump64_format(Elf64_Ehdr	*elf, char **av, size_t filesize, void *data)
   while (++i < 5)
     flags[i] = false;
   printf("architecture: %s, flags 0x%08lx:\n", getArch64(elf),
-  get_flags64(elf, shdr, strtab, flags));
+	 get_flags64(elf, shdr, strtab, flags));
   print_flags64(flags);
   printf("start address 0x%016lx\n\n", elf->e_entry);
   print_objdump64(elf, shdr, strtab);

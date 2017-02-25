@@ -18,7 +18,7 @@ void	check_printable_char(char c)
     printf(".");
 }
 
-int	print_char64(size_t i, Elf64_Shdr	*shdr, void *data)
+int	print_char64(size_t i, Elf64_Shdr *shdr, void *data)
 {
   size_t	j;
 
@@ -27,25 +27,25 @@ int	print_char64(size_t i, Elf64_Shdr	*shdr, void *data)
   if (i == 0 || i % 16 == 0)
     {
       check_printable_char((unsigned char)((char *)(data
-        + shdr->sh_offset + i))[0]);
+						    + shdr->sh_offset + i))[0]);
       i++;
       j++;
     }
   while ((i % 16) != 0 && i < shdr->sh_size && i != 0)
     {
       check_printable_char((unsigned char)((char *)(data
-        + shdr->sh_offset + i))[0]);
+						    + shdr->sh_offset + i))[0]);
       i++;
       j++;
     }
   if (j < 16)
-  	 while (++j <= 16)
-  	   printf(" ");
+    while (++j <= 16)
+      printf(" ");
   printf("\n");
   return (i);
 }
 
-void	print_section64(size_t i, Elf64_Shdr	*shdr, void *data)
+void	print_section64(size_t i, Elf64_Shdr *shdr, void *data)
 {
   size_t x;
 
@@ -53,7 +53,8 @@ void	print_section64(size_t i, Elf64_Shdr	*shdr, void *data)
   x = 1;
   if (i == 0 || i % 16 == 0)
     {
-      printf("%02x", (unsigned char)((char *)(data + shdr->sh_offset + i))[0]);
+      printf("%02x", (unsigned char)((char *)(data
+					      + shdr->sh_offset + i))[0]);
       x += 2;
       i++;
     }
@@ -64,32 +65,33 @@ void	print_section64(size_t i, Elf64_Shdr	*shdr, void *data)
       	  printf(" ");
       	  x++;
       	}
-      printf("%02x", (unsigned char)((char *)(data + shdr->sh_offset + i))[0]);
+      printf("%02x", (unsigned char)((char *)(data
+					      + shdr->sh_offset + i))[0]);
       x += 2;
       i++;
     }
   while (++x <= 36)
-  	printf(" ");
+    printf(" ");
 }
 
-void print_hearth64(Elf64_Shdr	*shdr, char *strtab, size_t size, void *data)
+void print_hearth64(Elf64_Shdr *shdr, char *strtab, size_t size, void *data)
 {
   size_t j;
 
   j = 0;
   if (shdr->sh_size == 0)
-   return;
+    return;
   size = size ;
   printf("Contents of section %s:\n", &strtab[shdr->sh_name]);
   while (j < shdr->sh_size)
-  {
-    printf(" %04lx", shdr->sh_addr + j);
-    print_section64(j, shdr, data);
-    j = print_char64(j, shdr, data);
-  }
+    {
+      printf(" %04lx", shdr->sh_addr + j);
+      print_section64(j, shdr, data);
+      j = print_char64(j, shdr, data);
+    }
 }
 
-void	print_objdump64(Elf64_Ehdr *elf, Elf64_Shdr	*shdr, char *strtab)
+void	print_objdump64(Elf64_Ehdr *elf, Elf64_Shdr *shdr, char *strtab)
 {
   size_t	size;
   void *data;
@@ -99,14 +101,14 @@ void	print_objdump64(Elf64_Ehdr *elf, Elf64_Shdr	*shdr, char *strtab)
   size = 0;
   data = (void *)elf;
   while (size < elf->e_shnum)
-  {
-    offset = elf->e_shoff + size * sizeof(Elf64_Shdr);
-    current = (Elf64_Shdr *)(data + offset);
-    if (strcmp(&strtab[shdr[size].sh_name], "") > 0)
     {
-      if(must_i_print_it64(current, &strtab[shdr[size].sh_name]))
-        print_hearth64(current, strtab, size, data);
+      offset = elf->e_shoff + size * sizeof(Elf64_Shdr);
+      current = (Elf64_Shdr *)(data + offset);
+      if (strcmp(&strtab[shdr[size].sh_name], "") > 0)
+	{
+	  if (must_i_print_it64(current, &strtab[shdr[size].sh_name]))
+	    print_hearth64(current, strtab, size, data);
+	}
+      size++;
     }
-    size++;
-  }
 }

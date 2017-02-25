@@ -45,16 +45,16 @@ char	get_shdr_symbols64(Elf64_Shdr *shdr, Elf64_Sym *symbol)
   shdr[symbol->st_shndx].sh_type == SHT_NOBITS
     && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE) ?
     c = 'B' :
-  (shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
-    && shdr[symbol->st_shndx].sh_flags == SHF_ALLOC)
+    (shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
+     && shdr[symbol->st_shndx].sh_flags == SHF_ALLOC)
     || (shdr[symbol->st_shndx].sh_flags == 18) ?
     c = 'R' :
-  shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
+    shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
     && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE) ?
     c = 'D' :
-  shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
+    shdr[symbol->st_shndx].sh_type == SHT_PROGBITS
     && shdr[symbol->st_shndx].sh_flags == (SHF_ALLOC | SHF_EXECINSTR) ?
-     c = 'T' :
-  shdr[symbol->st_shndx].sh_type == SHT_DYNAMIC ? c = 'D' : c;
+    c = 'T' :
+    shdr[symbol->st_shndx].sh_type == SHT_DYNAMIC ? c = 'D' : c;
   return (c);
 }

@@ -69,7 +69,7 @@ int	check_and_print64(void *tab[3], char *symbolName,
 }
 
 void	show_64(Elf64_Shdr *current, Elf64_Shdr *strtab,
-  void *data, Elf64_Shdr *shdr)
+		void *data, Elf64_Shdr *shdr)
 {
   size_t	i;
   size_t	j;

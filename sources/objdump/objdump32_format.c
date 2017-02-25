@@ -28,11 +28,12 @@ char	*getArch32(Elf32_Ehdr	*elf)
   return ("NONE");
 }
 
-void	objdump32_format(Elf32_Ehdr	*elf, char **av, size_t filesize, void *data)
+void	objdump32_format(Elf32_Ehdr *elf, char **av,
+			 size_t filesize, void *data)
 {
   Elf32_Shdr	*shdr;
   char	*strtab;
-  int	i = 0;
+  int	i;
   bool	*flags;
 
   i = -1;

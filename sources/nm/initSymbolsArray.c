@@ -66,7 +66,7 @@ char	**initSymbolsArray(Elf32_Shdr *current,
 }
 
 char	**initSymbolsArray64(Elf64_Shdr *current,
-			   Elf64_Shdr *strtab, void *data)
+			     Elf64_Shdr *strtab, void *data)
 {
   size_t	i;
   size_t	j;
