@@ -18,15 +18,15 @@ void	my_objdump(char *file, char **av)
 
   if ((fd = my_open(file, av)) == -1)
     return;
-  //  printf("\n%s:", file);
   if ((data = mmap(NULL, filesize(fd), PROT_READ,
        MAP_SHARED, fd, 0)) == MAP_FAILED)
     return (print_error_and_exit("mmap", av[0]));
   elf = (Elf32_Ehdr *)data;
-  elf->e_ident[EI_CLASS] == ELFCLASS32 ? 
+  elf->e_ident[EI_CLASS] == ELFCLASS32 ?
     (printf("\n%s:", file), objdump32_format(elf, av, filesize(fd), data)) :
-  elf->e_ident[EI_CLASS] == ELFCLASS64 ?
-    (printf("\n%s:", file), objdump64_format((Elf64_Ehdr *)data, av, filesize(fd), data)) : 
+    elf->e_ident[EI_CLASS] == ELFCLASS64 ?
+    (printf("\n%s:", file),
+     objdump64_format((Elf64_Ehdr *)data, av, filesize(fd), data)) :
     fprintf(stderr, "%s: %s: File format not recognized\n", av[0], file);
   if (munmap(data, filesize(fd)) == -1)
     return (print_error_and_exit("munmap", av[0]));

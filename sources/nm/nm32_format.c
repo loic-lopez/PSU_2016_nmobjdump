@@ -20,7 +20,8 @@ Elf32_Shdr	*get_stringtab(Elf32_Shdr *shdr, Elf32_Ehdr *elf, void *data)
   while (++i < elf->e_shnum)
     {
       offset = elf->e_shoff + i * sizeof(Elf32_Shdr);
-      name = (char *)(data + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
+      name = (char *)(data + shdr[elf->e_shstrndx].sh_offset
+		      + shdr[i].sh_name);
       if (!strcmp(".strtab", name))
 	return ((Elf32_Shdr *)(data + offset));
     }

@@ -20,7 +20,8 @@ Elf64_Shdr	*get_stringtab64(Elf64_Shdr *shdr, Elf64_Ehdr *elf, void *data)
   while (++i < elf->e_shnum)
     {
       offset = elf->e_shoff + i * sizeof(Elf64_Shdr);
-      name = (char *)(data + shdr[elf->e_shstrndx].sh_offset + shdr[i].sh_name);
+      name = (char *)(data + shdr[elf->e_shstrndx].sh_offset
+		      + shdr[i].sh_name);
       if (!strcmp(".strtab", name))
 	return ((Elf64_Shdr *)(data + offset));
     }
